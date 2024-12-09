@@ -21,7 +21,7 @@ import { cardio } from 'ldrs'
 
 const BasicGrid22 = () => {
     cardio.register()
-    const [count, setCount] = useState(1)
+    const [count, setCount] = useState('0')
     const [advice, setAdvice] = useState('Roll the dice for some advice!');
     const [loading, setLoading] = useState(false);
    
@@ -34,6 +34,7 @@ const BasicGrid22 = () => {
           }
           const data = await response.json();
           setAdvice(data.slip.advice);
+          setCount(data.slip.id);
         } catch (error) {
           console.error('Error fetching advice:', error);
           setAdvice('Failed to fetch advice. Try again later.');
@@ -109,7 +110,7 @@ const BasicGrid22 = () => {
                             cursor: 'pointer',
                             transition: 'box-shadow 0.3s ease, transform 0.3s ease'
                         }}
-                        onClick={() => {setCount((count) => count + 1); fetchAdvice();}}
+                        onClick={() => {fetchAdvice();}}
 
                     >
                         <img src={dice} className='dice' alt="" />
